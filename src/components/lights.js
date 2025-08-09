@@ -4,8 +4,8 @@ function createLights() {
   const mainLight = new DirectionalLight("#FFFCFB", 7);
   mainLight.position.set(10, 10, 10);
 
-  const ambientLight = new AmbientLight("white", 2);
-  const hemisphereLight = new HemisphereLight('white', 'darkslategrey', 5);
+  const ambientLight = new AmbientLight("white", 0);
+  const hemisphereLight = new HemisphereLight('white', '#14153d', 5);
 
   // let angle = 0;
   //

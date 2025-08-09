@@ -4,5 +4,5 @@ export default defineConfig({
   server: {
     host: true,
   },
-  base: '/three-vanila/' 
+  // base: '/three-vanila/' 
 })

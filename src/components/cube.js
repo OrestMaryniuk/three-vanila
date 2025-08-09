@@ -13,9 +13,6 @@ function createMaterial() {
   const texture1 = textureLoader.load("/assets/uv-test-col.png");
   const texture2 = textureLoader.load("/assets/oakfloor_basecolor.png");
 
-
-  console.log("TEXTURE", texture);
-
   const material = new MeshStandardMaterial({
     map: texture2,
     color: "#574e4e",
@@ -35,7 +32,7 @@ function createCube() {
   const material = createMaterial();
   const cube = new Mesh(geometry, material);
 
-  cube.rotation.set(0.5, 0.5, 0);
+  // cube.rotation.set(0.5, 0.5, 0);
 
   const radiansPerSecond = MathUtils.degToRad(30);
   let time = 0;
