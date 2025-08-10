@@ -9,7 +9,8 @@ import createControls from "./systems/controls.js";
 import createMeshGroup from "./components/meshGroup.js";
 import Car from "./components/Car/Car.js";
 import helpers from "./components/helpers.js";
-const { createAxesHelper, createGridHelper } = helpers
+import Road from "./components/Road/Road.js";
+const { createAxesHelper, createGridHelper } = helpers;
 
 class World {
   #camera;
@@ -26,17 +27,19 @@ class World {
     container.append(this.#renderer.domElement);
     // const cube = createCube();
     const car = new Car();
+    const road = new Road();
     // const meshGroup = createMeshGroup();
-    const { mainLight, ambientLight, hemisphereLight, spotLight } = createLights();
+    const { mainLight, ambientLight, hemisphereLight, spotLight } =
+      createLights();
     const controls = createControls(this.#camera, this.#renderer.domElement);
     // controls.target.copy(cube.position);
 
-    this.#loop.updatables.push(controls);
-    this.#scene.add(car, mainLight, ambientLight, hemisphereLight);
+    this.#loop.updatables.push(controls, car, road);
+    this.#scene.add(car, road, mainLight, ambientLight, hemisphereLight);
 
     const resizer = new Resizer(container, this.#camera, this.#renderer);
 
-    this.#scene.add(createAxesHelper(), createGridHelper());
+    // this.#scene.add(createAxesHelper(), createGridHelper());
     // resizer = new Resizer(container, this.#camera, this.#renderer);
   }
 

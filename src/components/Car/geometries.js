@@ -1,4 +1,4 @@
-import { BoxGeometry, CylinderGeometry, ExtrudeGeometry, Shape, SphereGeometry } from "three";
+import { BoxGeometry, CylinderGeometry, SphereGeometry } from "three";
 
 function createGeometries() {
   const body = new BoxGeometry(4, 1, 2.3);
@@ -7,7 +7,8 @@ function createGeometries() {
   const rim = new CylinderGeometry(0.3, 0.3, 0.3, 16);
   const roof = new BoxGeometry(1.75, 0.1, 1.75);
   const lights = new SphereGeometry(0.25, 16, 16);
-  const bumper = new BoxGeometry(4.2, 0.4, 2.4)
+  const bumper = new BoxGeometry(4.2, 0.4, 2.4);
+  const stops = new BoxGeometry(0.2, 0.3, 0.4);
 
   return {
     body,
@@ -16,7 +17,8 @@ function createGeometries() {
     tires,
     rim,
     roof,
-    lights
+    lights,
+    stops,
   };
 }
 

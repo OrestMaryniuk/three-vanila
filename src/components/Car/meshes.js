@@ -9,7 +9,7 @@ function createMeshes() {
   const body = new Mesh(geometries.body, materials.body);
 
   const bumper = new Mesh(geometries.bumper, materials.bumper);
-  bumper.position.y=-0.3
+  bumper.position.y = -0.3;
 
   const cabin = new Mesh(geometries.cabin, materials.glass);
   cabin.position.set(0.4, 0.8, 0);
@@ -24,39 +24,43 @@ function createMeshes() {
   const wheelProto = new Group();
   wheelProto.add(tire, rim);
 
-  function createWheelPair(yaw, zOffset) {
+  function createWheelPair(zOffset) {
     const rightWheel = wheelProto.clone();
-    rightWheel.position.set(yaw, -0.3, zOffset);
+    rightWheel.position.set(0, 0, zOffset);
 
     const leftWheel = wheelProto.clone();
     leftWheel.rotation.y = MathUtils.degToRad(180);
-    leftWheel.position.set(yaw, -0.3, -zOffset);
+    leftWheel.position.set(0, 0, -zOffset);
 
     const pair = new Group();
     pair.add(rightWheel, leftWheel);
     return pair;
   }
 
-  const frontWheels = createWheelPair(-1.3, 1.1);
-  const rearWheels = createWheelPair(1.3, 1.1);
-
-  const tires = new Group();
-  tires.add(frontWheels, rearWheels);
+  const frontWheels = createWheelPair(1.1);
+  frontWheels.position.set(-1.3, -0.3, 0);
+  const rearWheels = createWheelPair(1.1);
+  rearWheels.position.set(1.3, -0.3, 0);
 
   const roof = new Mesh(geometries.roof, materials.body);
   roof.position.set(0.4, 1.1, 0);
 
   const light = new Mesh(geometries.lights, materials.lights);
-  light.position.set(-1.85, 0.2, -0.9);
+  light.position.set(-1.85, 0.2, 0);
+
+  const stops = new Mesh(geometries.stops, materials.stops);
+  stops.position.set(2, 0.2, 0);
   const lights = new Group();
+
   for (let i = 0; i < 2; i++) {
     const newLight = light.clone();
+    const newStops = stops.clone();
     i % 2 === 1 ? (newLight.position.z = 0.9) : (newLight.position.z = -0.9);
-
-    lights.add(newLight);
+    i % 2 === 1 ? (newStops.position.z = 0.9) : (newStops.position.z = -0.9);
+    lights.add(newLight, newStops);
   }
 
-  return { body, bumper, cabin, tires, roof, lights };
+  return { body, bumper, cabin, frontWheels, rearWheels, roof, lights };
 }
 
 export default createMeshes;
