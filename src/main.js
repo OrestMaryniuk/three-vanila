@@ -1,14 +1,17 @@
 import World from "./World.js";
 
-function main() {
-  const container = document.getElementById('app');
-  const button = document.getElementById('button');
+async function main() {
+  const container = document.getElementById("app");
+  const button = document.getElementById("button");
 
   // button.addEventListener('click', function () {
-    button.style.display = 'none';
-    const world = new World(container);
+  button.style.display = "none";
+  const world = new World(container);
+  await world.init();
   world.start();
   // })
 }
 
-main()
+main().catch((err) => {
+  console.error(err);
+});
